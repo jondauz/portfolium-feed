@@ -15,7 +15,7 @@ class ProjectCard extends React.Component {
     return(
       <article className="project-card">
         <header>
-          <img src={this.getProfileImage(data.profile.avatar.dynamic)} alt={`${data.profile.firstname} ${data.profile.lastname}`} />
+          <img className="project-card__profile-image" src={this.getProfileImage(data.profile.avatar.dynamic)} alt={`${data.profile.firstname} ${data.profile.lastname}`} />
           {data.profile.firstname} {data.profile.lastname}
         </header>
         <div className="project-card__image" style={{

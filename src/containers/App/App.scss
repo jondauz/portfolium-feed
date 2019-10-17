@@ -9,13 +9,13 @@
     flex: 0 0 calc(100% - 2rem);
     margin: 1rem;
 
-    @include bp(small) {
+    @include bp(medium) {
       flex: 0 0 calc(50% - 2rem);
     }
-    @include bp(medium) {
+    @include bp(large) {
       flex: 0 0 calc(33% - 2rem);
     }
-    @include bp(large) {
+    @include bp(xlarge) {
       flex: 0 0 calc(25% - 2rem);
     }
   }
