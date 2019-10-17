@@ -1,17 +1,98 @@
 .project-card {
-  border: 1px solid black;
+  background-color: white;
+  box-shadow: 0 1px 3px 0 rgba(28,36,58,.1), 0 1px 1px 0 rgba(28,36,58,.07), 0 2px 1px -1px rgba(28,36,58,.06);
+  display: flex;
+  flex-direction: column;
+  font-size: 0.875rem;
+  color: rgba(28,36,58,.87);
+  line-height: 2;
+  position: relative;
+  overflow: hidden;
 
-  .project-card__image {
+  &:hover {
+    header {
+      transform: translateY(0%);
+    }
+
+    .project-card__image::before {
+      content: '';
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      position: absolute;
+      background-color: rgba(0,0,0,.36);
+    }
+  }
+
+  header {
+    background-color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    transform: translateY(-100%);
+    transition: transform .3s ease;
+    z-index: 1;
+
+    img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      margin-right: 0.75rem;
+    }
+  }
+
+  &__image {
     background-size: cover;
     background-position: center;
     width: 100%;
     padding-bottom: 58%;
     position: relative;
-    z-index: -1;
+    transition: transform .3s ease;
   }
 
-  .project-card__content {
+  &__title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  &__content {
     padding: 1rem;
-    border-top: 1px solid black;
+    flex: 1;
+    border-top: 1px solid rgba(10,38,66,.08);
+  }
+
+  &__category {
+    padding: 0.25rem 1rem 1rem;
+    color: rgba(28,36,58,.64);
+  }
+
+  footer {
+    border-top: 1px solid rgba(10,38,66,.08);
+    padding: 1rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 1rem;
+    color: rgba(0,0,0,0.54);
+
+    > span {
+      flex: 1;
+    }
+
+    .fa-heart {
+      font-size: 1.5rem;
+      margin-right: 0.5rem;
+    }
+
+    .fa-share-alt {
+      font-size: 1.5rem;
+      justify-self: flex-end;
+    }
   }
 }
