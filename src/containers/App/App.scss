@@ -1,22 +1,22 @@
-.App {
-  text-align: center;
-}
+@import "../../mixins"; 
 
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.project-cards {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+  flex-wrap: wrap;
+  margin: 1rem;
 
-.App-link {
-  color: #09d3ac;
+  > .project-card {
+    flex: 0 0 calc(100% - 2rem);
+    margin: 1rem;
+
+    @include bp(small) {
+      flex: 0 0 calc(50% - 2rem);
+    }
+    @include bp(medium) {
+      flex: 0 0 calc(33% - 2rem);
+    }
+    @include bp(large) {
+      flex: 0 0 calc(25% - 2rem);
+    }
+  }
 }

@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.scss';
 import { ProjectCard } from '../../components';
-import retrievedata from '../../services';
+import retrieveCards from '../../services';
+import debounce from 'lodash/debounce';
 
 class App extends React.Component {
 
@@ -16,29 +17,63 @@ class App extends React.Component {
         sort: 'recent'
       },
       isLoaded: false,
+      isRetrieving: false,
       projects: []
     };
+
+    this.scrollTimer = null;
+  }
+
+  getCards() {
+    this.setState({ isRetrieving: true });
+    retrieveCards(this.state.params)
+      .then(res => res.json())
+      .then(results => this.setState({
+        projects: [...this.state.projects, ...results],
+        isLoaded: true,
+        isRetrieving: false
+      }));
+  }
+
+  loadMore() {
+    this.setState(state => {
+      return {
+        params: {
+          ...state.params,
+          offset: state.params.offset + 1
+        }
+      }
+    }, this.getCards());
+  }
+
+  handleScroll() {
+    let lastElement = document.querySelector('div.project-cards > .project-card:last-of-type');
+    let lastElementOffset = lastElement.offsetTop + lastElement.clientHeight;
+    let pageOffset = window.pageYOffset + window.innerHeight;
+
+    if (pageOffset > lastElementOffset && !this.state.isRetrieving) {
+      this.loadMore();
+    }
   }
 
   componentDidMount() {
-    retrievedata(this.state.params)
-      .then(res => res.json())
-      .then(result => this.setState({ projects: result, isLoaded: true }));
+    this.getCards();
+
+    window.addEventListener('scroll', debounce(() => this.handleScroll(), 300));
   }
 
   render() {
-
     let { projects, isLoaded } = this.state;
 
     if (!isLoaded) {
       return <div>Loading...</div>;
     } else {
       return (
-        <ul>
+        <div className="project-cards">
           {projects.map((item, index) => (
-            <ProjectCard key={item.id} data={item} />
+            <ProjectCard key={index} data={item} />
           ))}
-        </ul>
+        </div>
       );
     }
   }

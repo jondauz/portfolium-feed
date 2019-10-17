@@ -1,0 +1,17 @@
+.project-card {
+  border: 1px solid black;
+
+  .project-card__image {
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    padding-bottom: 58%;
+    position: relative;
+    z-index: -1;
+  }
+
+  .project-card__content {
+    padding: 1rem;
+    border-top: 1px solid black;
+  }
+}
