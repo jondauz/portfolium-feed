@@ -12,14 +12,19 @@ class ProjectCard extends React.Component {
 
   render() {
     let { data } = this.props;
+    let backgroundImage = data.media[0].filename.url;
+    let avatar = this.getProfileImage(data.profile.avatar.dynamic);
+    let firstName = data.profile.firstname;
+    let lastName = data.profile.lastname;
+
     return(
       <article className="project-card">
         <header>
-          <img className="project-card__profile-image" src={this.getProfileImage(data.profile.avatar.dynamic)} alt={`${data.profile.firstname} ${data.profile.lastname}`} />
-          {data.profile.firstname} {data.profile.lastname}
+          <img className="project-card__profile-image" src={avatar} alt={`${firstName} ${lastName}`} />
+          {firstName} {lastName}
         </header>
         <div className="project-card__image" style={{
-          backgroundImage:`url(${data.media[0].filename.url})`
+          backgroundImage:`url(${backgroundImage})`
         }}>
         </div>
         <div className="project-card__content">
