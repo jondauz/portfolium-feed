@@ -37,11 +37,11 @@ class App extends React.Component {
       return {
         params: {
           ...state.params,
-          offset: state.params.offset + 1
+          offset: state.params.offset + state.params.limit
         },
         isRetrieving: true
       }
-    }, this.getCards());
+    }, this.getCards);
   }
 
   handleScroll() {
