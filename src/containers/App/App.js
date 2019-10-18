@@ -20,12 +20,9 @@ class App extends React.Component {
       isRetrieving: false,
       projects: []
     };
-
-    this.scrollTimer = null;
   }
 
   getCards() {
-    this.setState({ isRetrieving: true });
     retrieveCards(this.state.params)
       .then(res => res.json())
       .then(results => this.setState({
@@ -41,7 +38,8 @@ class App extends React.Component {
         params: {
           ...state.params,
           offset: state.params.offset + 1
-        }
+        },
+        isRetrieving: true
       }
     }, this.getCards());
   }
@@ -63,17 +61,22 @@ class App extends React.Component {
   }
 
   render() {
-    let { projects, isLoaded } = this.state;
+    let { projects, isLoaded, isRetrieving } = this.state;
 
     if (!isLoaded) {
-      return <div>Loading...</div>;
+      return <span className="app-loading">Loading...</span>;
     } else {
       return (
-        <div className="project-cards">
-          {projects.map((item, index) => (
-            <ProjectCard key={index} data={item} />
-          ))}
-        </div>
+        <>
+          <div className="project-cards">
+            {projects.map((item, index) => (
+              <ProjectCard key={index} data={item} />
+            ))}
+          </div>
+          <div className="loading-more">
+            { isRetrieving ? <span>Loading more...</span> : null }
+          </div>
+        </>
       );
     }
   }

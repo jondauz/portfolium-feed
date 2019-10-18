@@ -1,9 +1,27 @@
 @import "../../mixins"; 
 
+.app-loading {
+  font-size: 3rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-100%, -100%);
+  font-weight: 600;
+  color: #1b64ac;
+}
+
+.loading-more {
+  text-align: center;
+  font-weight: 600;
+  color: #1b64ac;
+  padding: 1rem 1rem 2rem;
+}
+
 .project-cards {
   display: flex;
   flex-wrap: wrap;
   margin: 1rem;
+  padding-bottom: 1rem;
 
   > .project-card {
     flex: 0 0 calc(100% - 2rem);
